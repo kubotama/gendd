@@ -1,0 +1,9 @@
+{
+  "name": "gendd",
+  "version": "0.0.1",
+  "description": "Generate dummy date",
+  "main": "index.js",
+  "repository": "git@github.com:kubotama/gendd.git",
+  "author": "kubotama <16697573+kubotama@users.noreply.github.com>",
+  "license": "MIT"
+}
