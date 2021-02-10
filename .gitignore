@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# reactの変換結果をgitの管理から除外する
+build/
