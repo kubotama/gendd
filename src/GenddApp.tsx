@@ -10,7 +10,7 @@ function GenddApp() {
   );
 }
 
-class DateRow extends React.Component {
+class DateRow extends React.Component <{}, {}> {
   labelDate = "日付データ";
   placeholderDate = "日付データ";
 
