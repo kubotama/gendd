@@ -21,3 +21,11 @@ describe("要素の存在", () => {
     expect(textElement).toBeInTheDocument();
   })
 })
+
+describe("要素の初期値", () => {
+  test('「日付データ」テキストボックスの初期値は空白', () => {
+    render(<GenddApp />);
+    const textElement = screen.getByPlaceholderText("日付データ");
+    expect(textElement).toHaveValue("");
+  })
+})
