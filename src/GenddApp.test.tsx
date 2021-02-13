@@ -9,4 +9,15 @@ describe("要素の存在", () => {
     expect(buttonElement).toBeInTheDocument();
   })
 
+  test("「日付データ」ラベルが存在", () => {
+    render(<GenddApp />);
+    const rowElement = screen.getByLabelText("日付データ");
+    expect(rowElement).toBeInTheDocument();
+  })
+
+  test("「日付データ」テキストボックスが存在", () => {
+    render(<GenddApp />);
+    const textElement = screen.getByPlaceholderText("日付データ");
+    expect(textElement).toBeInTheDocument();
+  })
 })
