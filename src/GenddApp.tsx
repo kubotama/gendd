@@ -11,10 +11,13 @@ function GenddApp() {
 }
 
 class DateRow extends React.Component {
+  labelDate = "日付データ";
+  placeholderDate = "日付データ";
+
   render() {
     return<div>
-    <label htmlFor="date-input">日付データ</label>
-    <input type="text" id="date-input" placeholder="日付データ" />
+    <label htmlFor="date-input">{this.labelDate}</label>
+    <input type="text" id="date-input" placeholder={this.placeholderDate} />
   </div>
   }
 }
