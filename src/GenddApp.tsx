@@ -5,7 +5,7 @@ function GenddApp() {
   return (
     <div className="GenddApp">
       <DateRow />
-      <button>生成</button>
+      <GenddButton />
     </div>
   );
 }
@@ -22,4 +22,11 @@ class DateRow extends React.Component <{}, {}> {
   }
 }
 
+class GenddButton extends React.Component <{}, {}> {
+  buttonGendd = "生成";
+
+  render() {
+    return <div><button>{this.buttonGendd}</button></div>
+  }
+}
 export default GenddApp;
