@@ -13,6 +13,10 @@ export class GenddApp extends React.Component <GenddAppProps, {}> {
     console.log("clicked!")
   }
 
+  toLocaleString(value: number) {
+    return new Date(value).toLocaleString();
+  }
+
   render() {
     return (
       <div className="GenddApp">

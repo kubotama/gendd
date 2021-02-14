@@ -40,4 +40,9 @@ describe("ボタンをクリック", () => {
     expect(mockClick).toBeCalledTimes(1);
   })
 
+  test('与えられた時刻値を文字列に変換する', () => {
+    const genddApp = new GenddApp({});
+    expect(genddApp.toLocaleString(1613268657038)).toBe("2021/2/14 11:10:57");
+    expect(genddApp.toLocaleString(1613273412347)).toBe("2021/2/14 12:30:12");
+  })
 })
