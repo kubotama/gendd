@@ -51,7 +51,7 @@ describe("要素の初期値", () => {
 })
 
 describe("ボタンをクリック", () => {
-  test('「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される', () => {
+  test('「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される(GenddButton)', () => {
     // Arrange
     const mockClick = jest.fn();
     render(<GenddButton onClick={mockClick} />);
@@ -62,6 +62,19 @@ describe("ボタンをクリック", () => {
 
     // Assert
     expect(mockClick).toBeCalledTimes(1);
+  })
+
+  test('「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される(GenddApp)', () => {
+    // Arrange
+    render(<GenddApp />)
+    const spyClick = jest.spyOn(GenddApp.prototype, "generateDummyDate").mockImplementation(() => 1613268657038);
+
+    // Act
+    userEvent.click(screen.getByText("生成"));
+
+    // Assert
+    expect(spyClick).toHaveBeenCalledTimes(1);
+    (GenddApp.prototype.generateDummyDate as jest.Mock).mockRestore();
   })
 
   interface TestValueExpected {
