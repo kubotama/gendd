@@ -93,9 +93,10 @@ ${1613273412347} | ${"2021/2/14 12:30:12"}
 
   // Act
   userEvent.click(screen.getByText("生成"));
+  const input = screen.getByPlaceholderText("日付データ") as HTMLInputElement;
 
   // Assert
-  expect(screen.getByPlaceholderText("日付データ").value).toBe(expected);
+  expect(input.value).toBe(expected);
   expect(spy).toHaveBeenCalled();
   })
 })
