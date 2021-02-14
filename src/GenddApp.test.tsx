@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import GenddApp from './GenddApp';
+import userEvent from '@testing-library/user-event';
+import {GenddApp, GenddButton} from './GenddApp';
 
 describe("要素の存在", () => {
   test('「生成」ボタンが存在', () => {
@@ -28,4 +29,15 @@ describe("要素の初期値", () => {
     const textElement = screen.getByPlaceholderText("日付データ");
     expect(textElement).toHaveValue("");
   })
+})
+
+describe("ボタンをクリック", () => {
+  test('「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される', () => {
+    const mockClick = jest.fn();
+    render(<GenddButton onClick={mockClick} />);
+    const buttonElement = screen.getByText("生成");
+    userEvent.click(buttonElement);
+    expect(mockClick).toBeCalledTimes(1);
+  })
+
 })
