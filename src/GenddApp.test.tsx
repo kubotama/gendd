@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -85,14 +88,23 @@ ${1613268657038} | ${"2021/2/14 11:10:57"}
 ${1613273412347} | ${"2021/2/14 12:30:12"}
 ` ('「生成」ボタンをクリックして日時データ($expected)を生成する', ({value, expected}: TestValueExpected) => {
   // Arrange
-  const genddApp = new GenddApp({});
-  genddApp.generateDummyDate = jest.fn().mockReturnValueOnce(value);
+  // const genddApp = new GenddApp({});
+  // genddApp.generateDummyDate = jest.fn().mockReturnValueOnce(value);
+  // const { container } = render(<GenddApp />);
+  render(<GenddApp />);
+  // const genddApp = new GenddApp({});
+  const spy = jest.spyOn(GenddApp.prototype, "generateDummyDate").mockImplementation(() => value);
+  // const genddApp = screen.getByTestId("GenddApp");
+  // const genddApp = container.querySelector("div.GenddApp");
+  // console.log(genddApp);
 
   // Act
-  genddApp.onClickGendd();
+  // genddApp.onClickGendd();
+  userEvent.click(screen.getByText("生成"));
 
   // Assert
   // 「日付データ」テキストボックスに日付データが表示される
-  expect(genddApp.dateString).toBe(expected);
+  expect(screen.getByPlaceholderText("日付データ").value).toBe(expected);
+  expect(spy).toHaveBeenCalled();
   })
 })
