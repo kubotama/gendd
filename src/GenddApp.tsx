@@ -4,13 +4,24 @@ import './GenddApp.css';
 interface GenddAppProps {
 }
 export class GenddApp extends React.Component <GenddAppProps, {}> {
+  dateString : string;
+  dateMax : number;
+  dateMin: number;
+
   constructor(props: GenddAppProps) {
     super(props);
     this.onClickGendd = this.onClickGendd.bind(this);
+    this.dateString = "";
+    this.dateMax = 1640962800000;
+    this.dateMin = 1609426800000;
+  }
+
+  generateDummyDate() {
+    return Math.floor(Math.random() * (this.dateMax - this.dateMin) + this.dateMin)
   }
 
   onClickGendd() {
-    console.log("clicked!")
+    this.dateString = this.toLocaleString(this.generateDummyDate());
   }
 
   toLocaleString(value: number) {

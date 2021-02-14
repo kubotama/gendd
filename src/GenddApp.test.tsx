@@ -78,4 +78,21 @@ describe("ボタンをクリック", () => {
     // Assert
     expect(dateString).toBe(expected);
   })
+
+test.each `
+value | expected
+${1613268657038} | ${"2021/2/14 11:10:57"}
+${1613273412347} | ${"2021/2/14 12:30:12"}
+` ('「生成」ボタンをクリックして日時データ($expected)を生成する', ({value, expected}: TestValueExpected) => {
+  // Arrange
+  const genddApp = new GenddApp({});
+  genddApp.generateDummyDate = jest.fn().mockReturnValueOnce(value);
+
+  // Act
+  genddApp.onClickGendd();
+
+  // Assert
+  // 「日付データ」テキストボックスに日付データが表示される
+  expect(genddApp.dateString).toBe(expected);
+  })
 })
