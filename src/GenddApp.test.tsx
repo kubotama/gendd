@@ -5,21 +5,33 @@ import {GenddApp, GenddButton} from './GenddApp';
 
 describe("要素の存在", () => {
   test('「生成」ボタンが存在', () => {
+    // Arrange
+
+    // Act
     render(<GenddApp />);
-    const buttonElement = screen.getByText("生成");
-    expect(buttonElement).toBeInTheDocument();
+
+    // Assert
+    expect(screen.getByText("生成")).toBeInTheDocument();
   })
 
   test("「日付データ」ラベルが存在", () => {
+    // Arrange
+
+    // Act
     render(<GenddApp />);
-    const rowElement = screen.getByLabelText("日付データ");
-    expect(rowElement).toBeInTheDocument();
+
+    // Assert
+    expect(screen.getByLabelText("日付データ")).toBeInTheDocument();
   })
 
   test("「日付データ」テキストボックスが存在", () => {
+    // Arrange
+
+    // Act
     render(<GenddApp />);
-    const textElement = screen.getByPlaceholderText("日付データ");
-    expect(textElement).toBeInTheDocument();
+
+    // Assert
+    expect(screen.getByPlaceholderText("日付データ")).toBeInTheDocument();
   })
 })
 
