@@ -97,6 +97,6 @@ ${1613273412347} | ${"2021/2/14 12:30:12"}
 
   // Assert
   expect(input.value).toBe(expected);
-  expect(spy).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalledTimes(1);
   })
 })
