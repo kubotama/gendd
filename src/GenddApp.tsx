@@ -1,13 +1,15 @@
 import React from 'react';
 import './GenddApp.css';
 
-function GenddApp() {
-  return (
-    <div className="GenddApp">
-      <DateRow />
-      <GenddButton />
-    </div>
-  );
+class GenddApp extends React.Component <{}, {}> {
+  render() {
+    return (
+      <div className="GenddApp">
+        <DateRow />
+        <GenddButton />
+      </div>
+    );
+  }
 }
 
 class DateRow extends React.Component <{}, {}> {
