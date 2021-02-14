@@ -33,10 +33,15 @@ describe("要素の初期値", () => {
 
 describe("ボタンをクリック", () => {
   test('「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される', () => {
+    // Arrange
     const mockClick = jest.fn();
     render(<GenddButton onClick={mockClick} />);
     const buttonElement = screen.getByText("生成");
+
+    // Act ボタンをクリック
     userEvent.click(buttonElement);
+
+    // Assert
     expect(mockClick).toBeCalledTimes(1);
   })
 
