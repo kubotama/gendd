@@ -37,9 +37,13 @@ describe("要素の存在", () => {
 
 describe("要素の初期値", () => {
   test('「日付データ」テキストボックスの初期値は空白', () => {
+    // Arrange
+
+    // Act
     render(<GenddApp />);
-    const textElement = screen.getByPlaceholderText("日付データ");
-    expect(textElement).toHaveValue("");
+
+    // Assert
+    expect(screen.getByPlaceholderText("日付データ")).toHaveValue("");
   })
 })
 
