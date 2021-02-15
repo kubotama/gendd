@@ -1,15 +1,14 @@
-import React from 'react';
-import './GenddApp.css';
+import React from "react";
+import "./GenddApp.css";
 
-interface GenddAppProps {
-}
+interface GenddAppProps {}
 
 interface GenddAppState {
-  dateString: string,
+  dateString: string;
 }
-export class GenddApp extends React.Component <GenddAppProps, GenddAppState> {
+export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
   // dateString : string;
-  dateMax : number;
+  dateMax: number;
   dateMin: number;
 
   constructor(props: GenddAppProps) {
@@ -21,7 +20,9 @@ export class GenddApp extends React.Component <GenddAppProps, GenddAppState> {
   }
 
   generateDummyDate() {
-    return Math.floor(Math.random() * (this.dateMax - this.dateMin) + this.dateMin)
+    return Math.floor(
+      Math.random() * (this.dateMax - this.dateMin) + this.dateMin
+    );
   }
 
   onClickGendd() {
@@ -36,37 +37,49 @@ export class GenddApp extends React.Component <GenddAppProps, GenddAppState> {
   render() {
     return (
       <div className="GenddApp">
-        <DateRow dateString={this.state.dateString}/>
-        <GenddButton onClick={this.onClickGendd}/>
+        <DateRow dateString={this.state.dateString} />
+        <GenddButton onClick={this.onClickGendd} />
       </div>
     );
   }
 }
 
 interface DateRowProps {
-  dateString: string,
+  dateString: string;
 }
 
-class DateRow extends React.Component <DateRowProps, {}> {
+class DateRow extends React.Component<DateRowProps, {}> {
   labelDate = "日付データ";
   placeholderDate = "日付データ";
 
   render() {
-    return<div>
-    <label htmlFor="date-input">{this.labelDate}</label>
-    <input type="text" id="date-input" placeholder={this.placeholderDate} value={this.props.dateString} readOnly />
-  </div>
+    return (
+      <div>
+        <label htmlFor="date-input">{this.labelDate}</label>
+        <input
+          type="text"
+          id="date-input"
+          placeholder={this.placeholderDate}
+          value={this.props.dateString}
+          readOnly
+        />
+      </div>
+    );
   }
 }
 
 interface GenddButtonProps {
-  onClick(): void,
+  onClick(): void;
 }
-export class GenddButton extends React.Component <GenddButtonProps, {}> {
+export class GenddButton extends React.Component<GenddButtonProps, {}> {
   buttonGendd = "生成";
 
   render() {
-    return <div><button onClick={this.props.onClick}>{this.buttonGendd}</button></div>
+    return (
+      <div>
+        <button onClick={this.props.onClick}>{this.buttonGendd}</button>
+      </div>
+    );
   }
 }
 export default GenddApp;
