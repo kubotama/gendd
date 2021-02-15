@@ -1,4 +1,4 @@
-# name
+# Name
 
 gendd: Generate Dummy Date
 
@@ -23,7 +23,11 @@ gendd: Generate Dummy Date
 
 > YYYY/MM/DD hh:mm:ss
 
+生成される日時は 2021 年の 1 年間(2021/01/01 00:00:00 から 2021/12/31 23:59:59 まで)とします。
+
 ## Reference
+
+<https://gendd.netlify.app/>
 
 ## Licence
 
