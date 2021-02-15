@@ -71,15 +71,15 @@ describe("ボタンをクリック (spyOnなし)", () => {
 
   test.each`
     value            | expected
-    ${1613268657038} | ${"2021/2/14 11:10:57"}
-    ${1613273412347} | ${"2021/2/14 12:30:12"}
+    ${1613268657038} | ${"2021/02/14 11:10:57"}
+    ${1613273412347} | ${"2021/02/14 12:30:12"}
   `(
     "時刻値($value)を文字列($expected)に変換する",
     ({ value, expected }: TestValueExpected) => {
       // Arrange
       const genddApp = new GenddApp({});
       // Act
-      const dateString = genddApp.toLocaleString(value);
+      const dateString = genddApp.toDateTimeString(value);
       // Assert
       expect(dateString).toBe(expected);
     }
@@ -106,10 +106,13 @@ describe("ボタンをクリック (spyOnなし)", () => {
 
     test.each`
       value            | expected
-      ${1613268657038} | ${"2021/2/14 11:10:57"}
-      ${1613273412347} | ${"2021/2/14 12:30:12"}
+      ${1613268657038} | ${"2021/02/14 11:10:57"}
+      ${1613273412347} | ${"2021/02/14 12:30:12"}
+      ${1609426800000} | ${"2021/01/01 00:00:00"}
+      ${1640962800000} | ${"2022/01/01 00:00:00"}
+      ${1640962799999} | ${"2021/12/31 23:59:59"}
     `(
-      "「生成」ボタンをクリックして日時データ($expected)を生成する",
+      "ボタンをクリックして日時データ($expected)を生成する",
       ({ value, expected }: TestValueExpected) => {
         // Arrange
         render(<GenddApp />);

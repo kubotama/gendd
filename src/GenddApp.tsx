@@ -26,12 +26,31 @@ export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
   }
 
   onClickGendd() {
-    const dateString = this.toLocaleString(this.generateDummyDate());
+    const dateString = this.toDateTimeString(this.generateDummyDate());
     this.setState({ dateString: dateString });
   }
 
-  toLocaleString(value: number) {
-    return new Date(value).toLocaleString();
+  /**
+   * 与えられた数値を文字列に変換して返します。指定された長さよりも短い場合には0で埋めます。
+   * @param {number} value - 文字列に変換する数値
+   * @param {number} length - 変換結果の文字列の長さ
+   * @return {string} - 変換結果の文字列
+   */
+  toZeroPaddingString(value: number, length: number) {
+    const str = "0000" + value.toString();
+    return str.slice(length * -1);
+  }
+
+  toDateTimeString(value: number) {
+    const date = new Date(value);
+    const YYYY = date.getFullYear();
+    const MM = this.toZeroPaddingString(date.getMonth() + 1, 2);
+    const DD = this.toZeroPaddingString(date.getDate(), 2);
+    const hh = this.toZeroPaddingString(date.getHours(), 2);
+    const mm = this.toZeroPaddingString(date.getMinutes(), 2);
+    const ss = this.toZeroPaddingString(date.getSeconds(), 2);
+    const dateString = `${YYYY}/${MM}/${DD} ${hh}:${mm}:${ss}`;
+    return dateString;
   }
 
   render() {
