@@ -86,22 +86,17 @@ describe("ボタンをクリック (spyOnなし)", () => {
   );
 
   describe("ボタンをクリック (spyOnあり)", () => {
-    afterEach(() => {
-      (GenddApp.prototype.generateDummyDate as jest.Mock).mockRestore();
-    });
-
     test("「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される(GenddApp)", () => {
       // Arrange
       render(<GenddApp />);
-      const spyGendd = jest
-        .spyOn(GenddApp.prototype, "generateDummyDate")
-        .mockImplementation(() => 1613268657038);
+      const mockGendd = jest.fn(() => 1613268657038);
+      GenddApp.prototype.generateDummyDate = mockGendd;
 
       // Act
       userEvent.click(screen.getByText("生成"));
 
       // Assert
-      expect(spyGendd).toHaveBeenCalledTimes(1);
+      expect(mockGendd).toHaveBeenCalledTimes(1);
     });
 
     test.each`
@@ -116,20 +111,18 @@ describe("ボタンをクリック (spyOnなし)", () => {
       ({ value, expected }: TestValueExpected) => {
         // Arrange
         render(<GenddApp />);
-        const spyGendd = jest
-          .spyOn(GenddApp.prototype, "generateDummyDate")
-          .mockImplementation(() => value);
+        const mockGendd = jest.fn(() => value);
+        GenddApp.prototype.generateDummyDate = mockGendd;
 
         // Act
         userEvent.click(screen.getByText("生成"));
-        const input = screen.getByPlaceholderText(
-          "日付データ"
-        ) as HTMLInputElement;
 
         // Assert
-        expect(input.value).toBe(expected);
-        expect(spyGendd).toHaveBeenCalledWith(1609426800000, 1640962800000);
-        expect(spyGendd).toHaveBeenCalledTimes(1);
+        expect(
+          (screen.getByPlaceholderText("日付データ") as HTMLInputElement).value
+        ).toBe(expected);
+        expect(mockGendd).toHaveBeenCalledWith(1609426800000, 1640962800000);
+        expect(mockGendd).toHaveBeenCalledTimes(1);
       }
     );
   });
