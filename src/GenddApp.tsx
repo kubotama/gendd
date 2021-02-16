@@ -19,14 +19,14 @@ export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
     this.state = { dateString: "" };
   }
 
-  generateDummyDate() {
-    return Math.floor(
-      Math.random() * (this.dateMax - this.dateMin) + this.dateMin
-    );
+  generateDummyDate(dateMin: number, dateMax: number) {
+    return Math.floor(Math.random() * (dateMax - dateMin) + dateMin);
   }
 
   onClickGendd() {
-    const dateString = this.toDateTimeString(this.generateDummyDate());
+    const dateString = this.toDateTimeString(
+      this.generateDummyDate(this.dateMin, this.dateMax)
+    );
     this.setState({ dateString: dateString });
   }
 

@@ -128,6 +128,7 @@ describe("ボタンをクリック (spyOnなし)", () => {
 
         // Assert
         expect(input.value).toBe(expected);
+        expect(spyGendd).toHaveBeenCalledWith(1609426800000, 1640962800000);
         expect(spyGendd).toHaveBeenCalledTimes(1);
       }
     );
