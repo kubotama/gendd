@@ -83,8 +83,6 @@ export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
   render() {
     return (
       <div className="GenddApp">
-        {/* <DateRow dateString={this.state.dateString} />
-        <GenddButton onClick={this.onClickGendd} /> */}
         <div>
           <label htmlFor="date-input">日付データ</label>
           <input
@@ -103,43 +101,3 @@ export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
     );
   }
 }
-
-interface DateRowProps {
-  dateString: string;
-}
-
-class DateRow extends React.Component<DateRowProps, {}> {
-  labelDate = "日付データ";
-  placeholderDate = "日付データ";
-
-  render() {
-    return (
-      <div>
-        <label htmlFor="date-input">{this.labelDate}</label>
-        <input
-          type="text"
-          id="date-input"
-          placeholder={this.placeholderDate}
-          value={this.props.dateString}
-          readOnly
-        />
-      </div>
-    );
-  }
-}
-
-interface GenddButtonProps {
-  onClick(): void;
-}
-export class GenddButton extends React.Component<GenddButtonProps, {}> {
-  buttonGendd = "生成";
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.props.onClick}>{this.buttonGendd}</button>
-      </div>
-    );
-  }
-}
-export default GenddApp;
