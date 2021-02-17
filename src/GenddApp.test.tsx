@@ -4,7 +4,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-// import { GenddApp } from "./GenddApp";
 import GenddApp from "./GenddApp";
 
 describe("要素の存在", () => {
