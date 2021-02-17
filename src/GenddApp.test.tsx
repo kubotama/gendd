@@ -4,7 +4,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { GenddApp } from "./GenddApp";
+// import { GenddApp } from "./GenddApp";
+import GenddApp from "./GenddApp";
 
 describe("要素の存在", () => {
   test("「生成」ボタンが存在", () => {
@@ -56,20 +57,28 @@ describe("ボタンをクリック", () => {
     expected: string;
   }
 
+  let spyGendd: jest.SpyInstance;
+  beforeEach(() => {
+    spyGendd = jest.spyOn(global.Math, "random");
+  });
+
+  afterEach(() => {
+    jest.spyOn(global.Math, "random").mockRestore();
+  });
+
   test.each`
-    value            | expected
-    ${1613268657038} | ${"2021/02/14 11:10:57"}
-    ${1613273412347} | ${"2021/02/14 12:30:12"}
-    ${1609426800000} | ${"2021/01/01 00:00:00"}
-    ${1640962800000} | ${"2022/01/01 00:00:00"}
-    ${1640962799999} | ${"2021/12/31 23:59:59"}
+    value                 | expected
+    ${0}                  | ${"2021/01/01 00:00:00"}
+    ${0.2895743899655405} | ${"2021/04/16 16:40:17"}
+    ${0.3801109594519132} | ${"2021/05/19 17:46:19"}
+    ${0.9949661385540645} | ${"2021/12/30 03:54:12"}
+    ${1}                  | ${"2022/01/01 00:00:00"}
   `(
     "ボタンをクリックして日時データ($expected)を生成する",
     ({ value, expected }: TestValueExpected) => {
       // Arrange
       render(<GenddApp />);
-      const mockGendd = jest.fn(() => value);
-      GenddApp.prototype.generateDummyDate = mockGendd;
+      spyGendd.mockReturnValue(value);
 
       // Act
       userEvent.click(screen.getByText("生成"));
@@ -78,8 +87,7 @@ describe("ボタンをクリック", () => {
       expect(
         (screen.getByPlaceholderText("日付データ") as HTMLInputElement).value
       ).toBe(expected);
-      expect(mockGendd).toHaveBeenCalledWith(1609426800000, 1640962800000);
-      expect(mockGendd).toHaveBeenCalledTimes(1);
+      expect(spyGendd).toHaveBeenCalledTimes(1);
     }
   );
 
