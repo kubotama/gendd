@@ -1,34 +1,11 @@
 import React, { useState } from "react";
 import "./GenddApp.css";
 
-interface GenddAppProps {}
-
-interface GenddAppState {
-  dateString: string;
-}
-// export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
-export default function GenddApp(props: GenddAppProps, states: GenddAppState) {
-  // dateString : string;
-  const dateMax = 1640962800000;
-  const dateMin = 1609426800000;
+export default function GenddApp() {
+  const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
+  const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateString, setDateString] = useState("");
-
-  /**
-   * 変数を初期化する。
-   *   - 「生成」ボタンがクリックされると呼び出される関数
-   *   - 生成する日時データの最小値と最大値
-   *   - 日時データ
-   * @param props
-   */
-  // constructor(props: GenddAppProps) {
-  //   super(props);
-  //   this.onClickGendd = this.onClickGendd.bind(this);
-  //   this.dateMax = 1640962800000;
-  //   this.dateMin = 1609426800000;
-  //   this.state = { dateString: "" };
-  //   this.textGendd = React.createRef();
-  // }
 
   /**
    * 「生成」ボタンがクリックされると呼び出されます。
@@ -38,7 +15,6 @@ export default function GenddApp(props: GenddAppProps, states: GenddAppState) {
    */
   function onClickGendd() {
     const dateString = toDateTimeString(generateDummyDate(dateMin, dateMax));
-    // this.setState({ dateString: dateString });
     setDateString(dateString);
     textGendd.current?.focus();
   }

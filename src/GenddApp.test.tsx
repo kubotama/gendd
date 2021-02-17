@@ -57,15 +57,13 @@ describe("ボタンをクリック", () => {
     expected: string;
   }
 
-  let mockGendd: jest.SpyInstance;
+  let spyGendd: jest.SpyInstance;
   beforeEach(() => {
-    mockGendd = jest.spyOn(global.Math, "random");
-    // jest.spyOn(global.Math, “random”).mockReturnValue(0.42);
+    spyGendd = jest.spyOn(global.Math, "random");
   });
 
   afterEach(() => {
     jest.spyOn(global.Math, "random").mockRestore();
-    // jest.spyOn(global.Math, “random”).mockRestore();
   });
 
   test.each`
@@ -79,12 +77,8 @@ describe("ボタンをクリック", () => {
     "ボタンをクリックして日時データ($expected)を生成する",
     ({ value, expected }: TestValueExpected) => {
       // Arrange
-      // const mockGendd = jest.fn(() => value);
-      // GenddApp.prototype.generateDummyDate = mockGendd;
-      // const mockGendd = jest.spyOn(GenddApp, "generateDummyDate");
       render(<GenddApp />);
-      // const mockGendd = jest.spyOn(global.Math, "random");
-      mockGendd.mockReturnValue(value);
+      spyGendd.mockReturnValue(value);
 
       // Act
       userEvent.click(screen.getByText("生成"));
@@ -93,8 +87,7 @@ describe("ボタンをクリック", () => {
       expect(
         (screen.getByPlaceholderText("日付データ") as HTMLInputElement).value
       ).toBe(expected);
-      // expect(mockGendd).toHaveBeenCalledWith(1609426800000, 1640962800000);
-      expect(mockGendd).toHaveBeenCalledTimes(1);
+      expect(spyGendd).toHaveBeenCalledTimes(1);
     }
   );
 
