@@ -101,3 +101,5 @@ export class GenddApp extends React.Component<GenddAppProps, GenddAppState> {
     );
   }
 }
+
+export default GenddApp;
