@@ -64,7 +64,6 @@ export default function GenddApp() {
         <input
           type="text"
           id="date-input"
-          placeholder="日付データ"
           value={dateString}
           ref={textGendd}
           readOnly

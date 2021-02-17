@@ -25,7 +25,7 @@ describe("要素の存在", () => {
     render(<GenddApp />);
 
     // Assert
-    expect(screen.getByLabelText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
   });
 
   test("「日付データ」テキストボックスが存在", () => {
@@ -35,7 +35,7 @@ describe("要素の存在", () => {
     render(<GenddApp />);
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
   });
 });
 
@@ -47,7 +47,7 @@ describe("要素の初期値", () => {
     render(<GenddApp />);
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toHaveValue("");
+    expect(genddApp.getByLabelText("日付データ")).toHaveValue("");
   });
 });
 
@@ -85,7 +85,7 @@ describe("ボタンをクリック", () => {
 
       // Assert
       expect(
-        (screen.getByPlaceholderText("日付データ") as HTMLInputElement).value
+        (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
       ).toBe(expected);
       expect(spyGendd).toHaveBeenCalledTimes(1);
     }
@@ -99,6 +99,6 @@ describe("ボタンをクリック", () => {
     userEvent.click(screen.getByText("生成"));
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toHaveFocus();
+    expect(screen.getByLabelText("日付データ")).toHaveFocus();
   });
 });
