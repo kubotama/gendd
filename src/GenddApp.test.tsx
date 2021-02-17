@@ -12,30 +12,30 @@ describe("要素の存在", () => {
     // Arrange
 
     // Act
-    render(<GenddApp />);
+    const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(screen.getByText("生成")).toBeInTheDocument();
+    expect(genddApp.getByText("生成")).toBeInTheDocument();
   });
 
   test("「日付データ」ラベルが存在", () => {
     // Arrange
 
     // Act
-    render(<GenddApp />);
+    const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(screen.getByLabelText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
   });
 
   test("「日付データ」テキストボックスが存在", () => {
     // Arrange
 
     // Act
-    render(<GenddApp />);
+    const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
   });
 });
 
@@ -44,10 +44,10 @@ describe("要素の初期値", () => {
     // Arrange
 
     // Act
-    render(<GenddApp />);
+    const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toHaveValue("");
+    expect(genddApp.getByLabelText("日付データ")).toHaveValue("");
   });
 });
 
@@ -77,15 +77,15 @@ describe("ボタンをクリック", () => {
     "ボタンをクリックして日時データ($expected)を生成する",
     ({ value, expected }: TestValueExpected) => {
       // Arrange
-      render(<GenddApp />);
+      const genddApp = render(<GenddApp />);
       spyGendd.mockReturnValue(value);
 
       // Act
-      userEvent.click(screen.getByText("生成"));
+      userEvent.click(genddApp.getByText("生成"));
 
       // Assert
       expect(
-        (screen.getByPlaceholderText("日付データ") as HTMLInputElement).value
+        (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
       ).toBe(expected);
       expect(spyGendd).toHaveBeenCalledTimes(1);
     }
@@ -93,12 +93,12 @@ describe("ボタンをクリック", () => {
 
   test("テキストボックスにフォーカスする", () => {
     // Arrange
-    render(<GenddApp />);
+    const genddApp = render(<GenddApp />);
 
     // Act
-    userEvent.click(screen.getByText("生成"));
+    userEvent.click(genddApp.getByText("生成"));
 
     // Assert
-    expect(screen.getByPlaceholderText("日付データ")).toHaveFocus();
+    expect(screen.getByLabelText("日付データ")).toHaveFocus();
   });
 });
