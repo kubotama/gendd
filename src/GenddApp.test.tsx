@@ -4,7 +4,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { GenddApp, GenddButton } from "./GenddApp";
+// import { GenddApp, GenddButton } from "./GenddApp";
+import { GenddApp } from "./GenddApp";
 
 describe("要素の存在", () => {
   test("「生成」ボタンが存在", () => {
@@ -51,18 +52,18 @@ describe("要素の初期値", () => {
 });
 
 describe("ボタンをクリック (spyOnなし)", () => {
-  test("「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される(GenddButton)", () => {
-    // Arrange
-    const mockClick = jest.fn();
-    render(<GenddButton onClick={mockClick} />);
-    const buttonElement = screen.getByText("生成");
+  // test("「生成」ボタンをクリックするとonClickGendd関数が一回呼び出される(GenddButton)", () => {
+  //   // Arrange
+  //   const mockClick = jest.fn();
+  //   render(<GenddButton onClick={mockClick} />);
+  //   const buttonElement = screen.getByText("生成");
 
-    // Act ボタンをクリック
-    userEvent.click(buttonElement);
+  //   // Act ボタンをクリック
+  //   userEvent.click(buttonElement);
 
-    // Assert
-    expect(mockClick).toBeCalledTimes(1);
-  });
+  //   // Assert
+  //   expect(mockClick).toBeCalledTimes(1);
+  // });
 
   interface TestValueExpected {
     value: number;
@@ -125,5 +126,16 @@ describe("ボタンをクリック (spyOnなし)", () => {
         expect(mockGendd).toHaveBeenCalledTimes(1);
       }
     );
+  });
+
+  test("テキストボックスにフォーカスする", () => {
+    // Arrange
+    render(<GenddApp />);
+
+    // Act
+    userEvent.click(screen.getByText("生成"));
+
+    // Assert
+    expect(screen.getByPlaceholderText("日付データ")).toHaveFocus();
   });
 });
