@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, InputLabel, TextField } from "@material-ui/core";
 import "./GenddApp.css";
 
 export default function GenddApp() {
@@ -60,17 +61,21 @@ export default function GenddApp() {
   return (
     <div className="GenddApp">
       <div>
-        <label htmlFor="date-input">日付データ</label>
-        <input
-          type="text"
+        <InputLabel htmlFor="date-input">日付データ</InputLabel>
+        <TextField
           id="date-input"
           value={dateString}
-          ref={textGendd}
-          readOnly
+          inputRef={textGendd}
+          variant="outlined"
+          InputProps={{
+            readOnly: true,
+          }}
         />
       </div>
       <div>
-        <button onClick={onClickGendd}>生成</button>
+        <Button variant="contained" color="primary" onClick={onClickGendd}>
+          生成
+        </Button>
       </div>
     </div>
   );
