@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 import "./GenddApp.css";
 
 export default function GenddApp() {
@@ -70,7 +71,9 @@ export default function GenddApp() {
         />
       </div>
       <div>
-        <button onClick={onClickGendd}>生成</button>
+        <Button variant="contained" color="primary" onClick={onClickGendd}>
+          生成
+        </Button>
       </div>
     </div>
   );
