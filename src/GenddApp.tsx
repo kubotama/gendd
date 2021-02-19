@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
+import { Button, InputLabel, TextField } from "@material-ui/core";
 import "./GenddApp.css";
 
 export default function GenddApp() {
