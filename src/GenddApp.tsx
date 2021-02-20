@@ -61,7 +61,7 @@ export default function GenddApp() {
   return (
     <div className="GenddApp">
       <TextField
-        id="date-input"
+        id="gendd-text"
         label="日付データ"
         value={dateString}
         inputRef={textGendd}
