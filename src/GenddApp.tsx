@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import "./GenddApp.css";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    text: {
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+    button: {
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  })
+);
 
 export default function GenddApp() {
   const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateString, setDateString] = useState("");
+  const classes = useStyles();
 
   /**
    * 「生成」ボタンがクリックされると呼び出されます。
@@ -59,22 +78,36 @@ export default function GenddApp() {
   }
 
   return (
-    <div className="GenddApp">
-      <TextField
-        id="gendd-text"
-        label="日付データ"
-        value={dateString}
-        inputRef={textGendd}
-        variant="outlined"
-        InputProps={{
-          readOnly: true,
-        }}
-      />
-      <div>
-        <Button variant="contained" color="primary" onClick={onClickGendd}>
-          生成
-        </Button>
-      </div>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}>
+          <TextField
+            id="gendd-text"
+            className={classes.text}
+            label="日付データ"
+            value={dateString}
+            inputRef={textGendd}
+            variant="outlined"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={onClickGendd}
+          >
+            生成
+          </Button>
+        </Grid>
+        <Grid item xs={4}></Grid>
+      </Grid>
     </div>
   );
 }
