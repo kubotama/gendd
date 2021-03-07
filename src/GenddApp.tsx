@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import "./GenddApp.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
+    // root: {},
     text: {
-      textAlign: "center",
-      color: theme.palette.text.secondary,
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "20px",
+      width: "200px",
     },
     button: {
-      textAlign: "center",
-      color: theme.palette.text.secondary,
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "20px",
+      width: "200px",
     },
   })
 );
@@ -78,36 +81,23 @@ export default function GenddApp() {
   }
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
-          <TextField
-            id="gendd-text"
-            className={classes.text}
-            label="日付データ"
-            value={dateString}
-            inputRef={textGendd}
-            variant="outlined"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-        </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            onClick={onClickGendd}
-          >
-            生成
-          </Button>
-        </Grid>
-        <Grid item xs={4}></Grid>
-      </Grid>
+    <div>
+      <TextField
+        id="gendd-text"
+        className={classes.text}
+        label="日付データ"
+        value={dateString}
+        inputRef={textGendd}
+        variant="outlined"
+      />
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={onClickGendd}
+      >
+        生成
+      </Button>
     </div>
   );
 }
