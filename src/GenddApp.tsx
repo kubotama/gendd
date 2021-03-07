@@ -1,12 +1,34 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import "./GenddApp.css";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    // root: {},
+    text: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "20px",
+      width: "200px",
+    },
+    button: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: "20px",
+      width: "200px",
+    },
+  })
+);
 
 export default function GenddApp() {
   const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateString, setDateString] = useState("");
+  const classes = useStyles();
 
   /**
    * 「生成」ボタンがクリックされると呼び出されます。
@@ -59,22 +81,23 @@ export default function GenddApp() {
   }
 
   return (
-    <div className="GenddApp">
+    <div>
       <TextField
-        id="date-input"
+        id="gendd-text"
+        className={classes.text}
         label="日付データ"
         value={dateString}
         inputRef={textGendd}
         variant="outlined"
-        InputProps={{
-          readOnly: true,
-        }}
       />
-      <div>
-        <Button variant="contained" color="primary" onClick={onClickGendd}>
-          生成
-        </Button>
-      </div>
+      <Button
+        className={classes.button}
+        variant="contained"
+        color="primary"
+        onClick={onClickGendd}
+      >
+        生成
+      </Button>
     </div>
   );
 }
