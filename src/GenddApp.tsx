@@ -98,6 +98,7 @@ export default function GenddApp() {
       >
         生成
       </Button>
+      <hr />
     </div>
   );
 }
