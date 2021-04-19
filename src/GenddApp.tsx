@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  DialogActions,
+} from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import "./GenddApp.css";
 
@@ -13,12 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: "20px",
       width: "200px",
     },
-    button: {
+    generateButton: {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "20px",
       width: "200px",
+    },
+    privacyButton: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "10px",
     },
   })
 );
@@ -28,6 +41,7 @@ export default function GenddApp() {
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateString, setDateString] = useState("");
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   /**
@@ -80,6 +94,36 @@ export default function GenddApp() {
     return dateString;
   }
 
+  function openPrivacy() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  const privacyBody = (
+    <div>
+      当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。このGoogleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。
+      この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。
+      この規約に関しての詳細は
+      <a
+        href="https://marketingplatform.google.com/about/analytics/terms/jp/"
+        target="”_blank”"
+      >
+        Googleアナリティクスサービス利用規約のページ{" "}
+      </a>
+      や
+      <a
+        href="https://policies.google.com/technologies/ads?hl=ja"
+        target="”_blank”"
+      >
+        Googleポリシーと規約ページ
+      </a>
+      をご覧ください。{" "}
+    </div>
+  );
+
   return (
     <div>
       <TextField
@@ -91,13 +135,32 @@ export default function GenddApp() {
         variant="outlined"
       />
       <Button
-        className={classes.button}
+        className={classes.generateButton}
         variant="contained"
         color="primary"
         onClick={onClickGendd}
       >
         生成
       </Button>
+      <hr />
+      <Button
+        className={classes.privacyButton}
+        onClick={openPrivacy}
+        variant="contained"
+      >
+        プライバシー・ポリシーの表示
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{"プライバシー・ポリシー"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{privacyBody}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} variant="contained">
+            閉じる
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
