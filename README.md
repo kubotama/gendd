@@ -13,6 +13,8 @@ gendd: Generate Dummy Date
 - React
 - Jest
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/55fb156b-613b-494a-ba92-acd251d017e4/deploy-status)](https://gendd.netlify.app/)
+
 ## Usage
 
 「生成」ボタンをクリックすると、生成された日時データが表示されます。表示された日時データを選択、コピーすることで、テストなどに利用できます。
