@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: "20px",
       width: "200px",
     },
+    privacyButton: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "10px",
+    },
   })
 );
 
@@ -138,7 +143,11 @@ export default function GenddApp() {
         生成
       </Button>
       <hr />
-      <Button onClick={openPrivacy} variant="contained">
+      <Button
+        className={classes.privacyButton}
+        onClick={openPrivacy}
+        variant="contained"
+      >
         プライバシー・ポリシーの表示
       </Button>
       <Dialog open={open} onClose={handleClose}>
