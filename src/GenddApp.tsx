@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: "20px",
       width: "200px",
     },
-    button: {
+    generateButton: {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
@@ -135,7 +135,7 @@ export default function GenddApp() {
         variant="outlined"
       />
       <Button
-        className={classes.button}
+        className={classes.generateButton}
         variant="contained"
         color="primary"
         onClick={onClickGendd}
