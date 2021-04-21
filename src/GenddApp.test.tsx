@@ -53,7 +53,8 @@ describe("要素の初期値", () => {
 describe("ボタンをクリック", () => {
   interface TestValueExpected {
     value: number;
-    expected: string;
+    expectedDate: string;
+    expectedDateValue: string;
   }
 
   let spyGendd: jest.SpyInstance;
@@ -66,15 +67,15 @@ describe("ボタンをクリック", () => {
   });
 
   test.each`
-    value                 | expected
-    ${0}                  | ${"2021/01/01 00:00:00"}
-    ${0.2895743899655405} | ${"2021/04/16 16:40:17"}
-    ${0.3801109594519132} | ${"2021/05/19 17:46:19"}
-    ${0.9949661385540645} | ${"2021/12/30 03:54:12"}
-    ${1}                  | ${"2022/01/01 00:00:00"}
+    value                 | expectedDate             | expectedDateValue
+    ${0}                  | ${"2021/01/01 00:00:00"} | ${"1609426800000"}
+    ${0.2895743899655405} | ${"2021/04/16 16:40:17"} | ${"1618558817961"}
+    ${0.3801109594519132} | ${"2021/05/19 17:46:19"} | ${"1621413979217"}
+    ${0.9949661385540645} | ${"2021/12/30 03:54:12"} | ${"1640804052145"}
+    ${1}                  | ${"2022/01/01 00:00:00"} | ${"1640962800000"}
   `(
     "ボタンをクリックして日時データ($expected)を生成する",
-    ({ value, expected }: TestValueExpected) => {
+    ({ value, expectedDate, expectedDateValue }: TestValueExpected) => {
       // Arrange
       const genddApp = render(<GenddApp />);
       spyGendd.mockReturnValue(value);
@@ -85,7 +86,11 @@ describe("ボタンをクリック", () => {
       // Assert
       expect(
         (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
-      ).toBe(expected);
+      ).toBe(expectedDate);
+      expect(
+        (genddApp.getByLabelText("日付データの内部表現") as HTMLInputElement)
+          .value
+      ).toBe(expectedDateValue);
       expect(spyGendd).toHaveBeenCalledTimes(1);
     }
   );
@@ -99,5 +104,17 @@ describe("ボタンをクリック", () => {
 
     // Assert
     expect(screen.getByLabelText("日付データ")).toHaveFocus();
+  });
+});
+
+describe("内部表現のテキストボックス", () => {
+  test("「内部表現」のテキストボックスの初期値は空白", () => {
+    // Arrange
+    const genddApp = render(<GenddApp />);
+
+    // Act
+
+    // Assert
+    expect(genddApp.getByLabelText("日付データの内部表現")).toHaveValue("");
   });
 });
