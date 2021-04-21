@@ -53,7 +53,7 @@ describe("要素の初期値", () => {
 describe("ボタンをクリック", () => {
   interface TestValueExpected {
     value: number;
-    expected: string;
+    expectedDate: string;
   }
 
   let spyGendd: jest.SpyInstance;
@@ -66,7 +66,7 @@ describe("ボタンをクリック", () => {
   });
 
   test.each`
-    value                 | expected
+    value                 | expectedDate
     ${0}                  | ${"2021/01/01 00:00:00"}
     ${0.2895743899655405} | ${"2021/04/16 16:40:17"}
     ${0.3801109594519132} | ${"2021/05/19 17:46:19"}
@@ -74,7 +74,7 @@ describe("ボタンをクリック", () => {
     ${1}                  | ${"2022/01/01 00:00:00"}
   `(
     "ボタンをクリックして日時データ($expected)を生成する",
-    ({ value, expected }: TestValueExpected) => {
+    ({ value, expectedDate }: TestValueExpected) => {
       // Arrange
       const genddApp = render(<GenddApp />);
       spyGendd.mockReturnValue(value);
@@ -85,7 +85,7 @@ describe("ボタンをクリック", () => {
       // Assert
       expect(
         (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
-      ).toBe(expected);
+      ).toBe(expectedDate);
       expect(spyGendd).toHaveBeenCalledTimes(1);
     }
   );
