@@ -40,6 +40,8 @@ export default function GenddApp() {
   const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
+  const textGenddValue: React.RefObject<HTMLInputElement> = React.createRef();
+  const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
@@ -51,7 +53,8 @@ export default function GenddApp() {
    *   3. 変換した文字列をdateString(テキストボックスに表示される)に設定します。
    */
   function onClickGendd() {
-    const dateString = toDateTimeString(generateDummyDate(dateMin, dateMax));
+    const dateValueString = generateDummyDate(dateMin, dateMax);
+    const dateString = toDateTimeString(dateValueString);
     setDateString(dateString);
     textGendd.current?.focus();
   }
@@ -132,6 +135,14 @@ export default function GenddApp() {
         label="日付データ"
         value={dateString}
         inputRef={textGendd}
+        variant="outlined"
+      />
+      <TextField
+        id="gendd-value-text"
+        className={classes.text}
+        label="日付データの内部表現"
+        value={dateValueString}
+        inputRef={textGenddValue}
         variant="outlined"
       />
       <Button

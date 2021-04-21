@@ -101,3 +101,15 @@ describe("ボタンをクリック", () => {
     expect(screen.getByLabelText("日付データ")).toHaveFocus();
   });
 });
+
+describe("内部表現のテキストボックス", () => {
+  test("「内部表現」のテキストボックスの初期値は空白", () => {
+    // Arrange
+    const genddApp = render(<GenddApp />);
+
+    // Act
+
+    // Assert
+    expect(genddApp.getByLabelText("日付データの内部表現")).toHaveValue("");
+  });
+});
