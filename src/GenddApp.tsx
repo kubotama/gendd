@@ -56,6 +56,7 @@ export default function GenddApp() {
     const dateValueString = generateDummyDate(dateMin, dateMax);
     const dateString = toDateTimeString(dateValueString);
     setDateString(dateString);
+    setDateValueString(dateValueString.toString());
     textGendd.current?.focus();
   }
 

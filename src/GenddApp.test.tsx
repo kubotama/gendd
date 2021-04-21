@@ -54,6 +54,7 @@ describe("ボタンをクリック", () => {
   interface TestValueExpected {
     value: number;
     expectedDate: string;
+    expectedDateValue: string;
   }
 
   let spyGendd: jest.SpyInstance;
@@ -66,15 +67,15 @@ describe("ボタンをクリック", () => {
   });
 
   test.each`
-    value                 | expectedDate
-    ${0}                  | ${"2021/01/01 00:00:00"}
-    ${0.2895743899655405} | ${"2021/04/16 16:40:17"}
-    ${0.3801109594519132} | ${"2021/05/19 17:46:19"}
-    ${0.9949661385540645} | ${"2021/12/30 03:54:12"}
-    ${1}                  | ${"2022/01/01 00:00:00"}
+    value                 | expectedDate             | expectedDateValue
+    ${0}                  | ${"2021/01/01 00:00:00"} | ${"1609426800000"}
+    ${0.2895743899655405} | ${"2021/04/16 16:40:17"} | ${"1618558817961"}
+    ${0.3801109594519132} | ${"2021/05/19 17:46:19"} | ${"1621413979217"}
+    ${0.9949661385540645} | ${"2021/12/30 03:54:12"} | ${"1640804052145"}
+    ${1}                  | ${"2022/01/01 00:00:00"} | ${"1640962800000"}
   `(
     "ボタンをクリックして日時データ($expected)を生成する",
-    ({ value, expectedDate }: TestValueExpected) => {
+    ({ value, expectedDate, expectedDateValue }: TestValueExpected) => {
       // Arrange
       const genddApp = render(<GenddApp />);
       spyGendd.mockReturnValue(value);
@@ -86,6 +87,10 @@ describe("ボタンをクリック", () => {
       expect(
         (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
       ).toBe(expectedDate);
+      expect(
+        (genddApp.getByLabelText("日付データの内部表現") as HTMLInputElement)
+          .value
+      ).toBe(expectedDateValue);
       expect(spyGendd).toHaveBeenCalledTimes(1);
     }
   );
