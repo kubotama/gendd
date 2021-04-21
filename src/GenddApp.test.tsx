@@ -118,3 +118,17 @@ describe("内部表現のテキストボックス", () => {
     expect(genddApp.getByLabelText("日付データの内部表現")).toHaveValue("");
   });
 });
+
+describe("日付データの書式のテキストボックス", () => {
+  test("「日付データのフォーマット」のテキストボックスの初期値", () => {
+    // Arrange
+    const genddApp = render(<GenddApp />);
+
+    // Act
+
+    // Assert
+    expect(genddApp.getByLabelText("日付データのフォーマット")).toHaveValue(
+      "YYYY/MM/dd HH:mm:ss"
+    );
+  });
+});

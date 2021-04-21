@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "20px",
-      width: "200px",
+      width: "220px",
     },
     generateButton: {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "20px",
-      width: "200px",
+      width: "220px",
     },
     privacyButton: {
       display: "block",
@@ -41,8 +41,11 @@ export default function GenddApp() {
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const textGenddValue: React.RefObject<HTMLInputElement> = React.createRef();
+  const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
+  const [dateFormatString] = useState("YYYY/MM/dd HH:mm:ss");
+
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -144,6 +147,14 @@ export default function GenddApp() {
         label="日付データの内部表現"
         value={dateValueString}
         inputRef={textGenddValue}
+        variant="outlined"
+      />
+      <TextField
+        id="gendd-format-text"
+        className={classes.text}
+        label="日付データのフォーマット"
+        value={dateFormatString}
+        inputRef={textGenddFormat}
         variant="outlined"
       />
       <Button
