@@ -153,7 +153,7 @@ export default function GenddApp() {
         id="gendd-format-text"
         className={classes.text}
         label="日付データのフォーマット"
-        value={dateFormatString}
+        defaultValue={dateFormatString}
         inputRef={textGenddFormat}
         variant="outlined"
       />
