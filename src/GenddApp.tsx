@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogActions,
 } from "@material-ui/core";
+import { format } from "date-fns";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import "./GenddApp.css";
 
@@ -44,7 +45,7 @@ export default function GenddApp() {
   const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
-  const [dateFormatString] = useState("YYYY/MM/dd HH:mm:ss");
+  const [dateFormatString] = useState("yyyy/MM/dd HH:mm:ss");
 
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
@@ -57,7 +58,7 @@ export default function GenddApp() {
    */
   function onClickGendd() {
     const dateValueString = generateDummyDate(dateMin, dateMax);
-    const dateString = toDateTimeString(dateValueString);
+    const dateString = toDateTimeString(dateValueString, dateFormatString);
     setDateString(dateString);
     setDateValueString(dateValueString.toString());
     textGendd.current?.focus();
@@ -74,30 +75,13 @@ export default function GenddApp() {
   }
 
   /**
-   * 与えられた数値を文字列に変換して返します。指定された長さよりも短い場合には0で埋めます。
-   * @param {number} value - 文字列に変換する数値
-   * @param {number} length - 変換結果の文字列の長さ
-   * @return {string} - 変換結果の文字列
-   */
-  function toZeroPaddingString(value: number, length: number): string {
-    const str = "0000" + value.toString();
-    return str.slice(length * -1);
-  }
-
-  /**
    * 与えられた時刻値を文字列に変換します。
    * @param {number} value - 文字列に変換する時刻値
    * @return {string} - 時刻値から変換された文字列
    */
-  function toDateTimeString(value: number): string {
+  function toDateTimeString(value: number, dateFormat: string): string {
     const date = new Date(value);
-    const YYYY = date.getFullYear();
-    const MM = toZeroPaddingString(date.getMonth() + 1, 2);
-    const DD = toZeroPaddingString(date.getDate(), 2);
-    const hh = toZeroPaddingString(date.getHours(), 2);
-    const mm = toZeroPaddingString(date.getMinutes(), 2);
-    const ss = toZeroPaddingString(date.getSeconds(), 2);
-    const dateString = `${YYYY}/${MM}/${DD} ${hh}:${mm}:${ss}`;
+    const dateString = format(date, dateFormat);
     return dateString;
   }
 
