@@ -128,7 +128,7 @@ describe("日付データの書式のテキストボックス", () => {
 
     // Assert
     expect(genddApp.getByLabelText("日付データのフォーマット")).toHaveValue(
-      "YYYY/MM/dd HH:mm:ss"
+      "yyyy/MM/dd HH:mm:ss"
     );
   });
 });
