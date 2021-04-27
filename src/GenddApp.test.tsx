@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import GenddApp from "./GenddApp";
 
@@ -130,5 +130,37 @@ describe("日付データの書式のテキストボックス", () => {
     expect(genddApp.getByLabelText("日付データのフォーマット")).toHaveValue(
       "YYYY/MM/dd HH:mm:ss"
     );
+  });
+});
+
+describe("日付データのフォーマットの変更が、日付データに反映する", () => {
+  let spyGendd: jest.SpyInstance;
+  beforeEach(() => {
+    spyGendd = jest.spyOn(global.Math, "random");
+  });
+
+  afterEach(() => {
+    jest.spyOn(global.Math, "random").mockRestore();
+  });
+
+  test("日付データのフォーマットの変更が、日付データに反映する", () => {
+    // Arrange
+    const genddApp = render(<GenddApp />);
+    spyGendd.mockReturnValue(0);
+
+    // Act
+    // 日付フォーマットをYYYY/MM/ddに変更する
+    const formatText = genddApp.getByLabelText(
+      "日付データのフォーマット"
+    ) as HTMLInputElement;
+    fireEvent.change(formatText, { value: "YYYY/MM/dd" });
+
+    userEvent.click(genddApp.getByText("生成"));
+
+    // Assert
+    //
+    expect(
+      (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
+    ).toBe("2021/01/01");
   });
 });
