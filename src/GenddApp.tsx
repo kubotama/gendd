@@ -45,7 +45,7 @@ export default function GenddApp() {
   const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
-  const [dateFormatString] = useState("yyyy/MM/dd HH:mm:ss");
+  const [dateFormatString, setDateFormat] = useState("yyyy/MM/dd HH:mm:ss");
 
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
@@ -115,6 +115,10 @@ export default function GenddApp() {
     </div>
   );
 
+  const changeFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDateFormat(event.target.value);
+  };
+
   return (
     <div>
       <TextField
@@ -140,6 +144,7 @@ export default function GenddApp() {
         defaultValue={dateFormatString}
         inputRef={textGenddFormat}
         variant="outlined"
+        onChange={changeFormat}
       />
       <Button
         className={classes.generateButton}

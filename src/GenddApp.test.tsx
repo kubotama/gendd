@@ -153,7 +153,7 @@ describe("日付データのフォーマットの変更が、日付データに�
     const formatText = genddApp.getByLabelText(
       "日付データのフォーマット"
     ) as HTMLInputElement;
-    fireEvent.change(formatText, { value: "YYYY/MM/dd" });
+    fireEvent.change(formatText, { target: { value: "yyyy/MM/dd" } });
 
     userEvent.click(genddApp.getByText("生成"));
 
