@@ -47,7 +47,7 @@ export default function GenddApp() {
   const [dateString, setDateString] = useState("");
   const [dateFormatString, setDateFormat] = useState("yyyy/MM/dd HH:mm:ss");
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   /**
