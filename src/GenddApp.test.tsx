@@ -74,7 +74,7 @@ describe("ボタンをクリック", () => {
     ${0.9949661385540645} | ${"2021/12/30 03:54:12"} | ${"1640804052145"}
     ${1}                  | ${"2022/01/01 00:00:00"} | ${"1640962800000"}
   `(
-    "ボタンをクリックして日時データ($expected)を生成する",
+    "ボタンをクリックして日時データ($expectedDate)を生成する",
     ({ value, expectedDate, expectedDateValue }: TestValueExpected) => {
       // Arrange
       const genddApp = render(<GenddApp />);
