@@ -134,6 +134,11 @@ describe("日付データの書式のテキストボックス", () => {
 });
 
 describe("日付データのフォーマットの変更が、日付データに反映する", () => {
+  interface TestValueExpected {
+    value: number;
+    format: string;
+    expectedDate: string;
+  }
   let spyGendd: jest.SpyInstance;
   beforeEach(() => {
     spyGendd = jest.spyOn(global.Math, "random");
@@ -143,24 +148,30 @@ describe("日付データのフォーマットの変更が、日付データに�
     jest.spyOn(global.Math, "random").mockRestore();
   });
 
-  test("日付データのフォーマットの変更が、日付データに反映する", () => {
-    // Arrange
-    const genddApp = render(<GenddApp />);
-    spyGendd.mockReturnValue(0);
+  test.each`
+    value | format          | expectedDate
+    ${0}  | ${"yyyy/MM/dd"} | ${"2021/01/01"}
+  `(
+    "日付データのフォーマットの変更が、日付データ($expectedDate)に反映する",
+    ({ value, format, expectedDate }: TestValueExpected) => {
+      // Arrange
+      const genddApp = render(<GenddApp />);
+      spyGendd.mockReturnValue(value);
 
-    // Act
-    // 日付フォーマットをYYYY/MM/ddに変更する
-    const formatText = genddApp.getByLabelText(
-      "日付データのフォーマット"
-    ) as HTMLInputElement;
-    fireEvent.change(formatText, { target: { value: "yyyy/MM/dd" } });
+      // Act
+      // 日付フォーマットをYYYY/MM/ddに変更する
+      const formatText = genddApp.getByLabelText(
+        "日付データのフォーマット"
+      ) as HTMLInputElement;
+      fireEvent.change(formatText, { target: { value: format } });
 
-    userEvent.click(genddApp.getByText("生成"));
+      userEvent.click(genddApp.getByText("生成"));
 
-    // Assert
-    //
-    expect(
-      (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
-    ).toBe("2021/01/01");
-  });
+      // Assert
+      //
+      expect(
+        (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
+      ).toBe(expectedDate);
+    }
+  );
 });
