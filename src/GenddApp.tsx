@@ -14,7 +14,6 @@ import "./GenddApp.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    // root: {},
     text: {
       display: "block",
       marginLeft: "auto",
