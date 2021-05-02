@@ -39,14 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function GenddApp() {
   const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
+
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const textGenddValue: React.RefObject<HTMLInputElement> = React.createRef();
   const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
+
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
   const [dateFormatString, setDateFormat] = useState("yyyy/MM/dd HH:mm:ss");
-
   const [open, setOpen] = useState(false);
+
   const classes = useStyles();
 
   /**
