@@ -149,8 +149,11 @@ describe("日付データのフォーマットの変更が、日付データに�
   });
 
   test.each`
-    value | format          | expectedDate
-    ${0}  | ${"yyyy/MM/dd"} | ${"2021/01/01"}
+    value                 | format            | expectedDate
+    ${0}                  | ${"yyyy/MM/dd"}   | ${"2021/01/01"}
+    ${0.2895743899655405} | ${"MM/dd"}        | ${"04/16"}
+    ${0.3801109594519132} | ${"HH:mm:ss"}     | ${"17:46:19"}
+    ${0.2895743899655405} | ${"MMMM do EEEE"} | ${"April 16th Friday"}
   `(
     "日付データのフォーマットの変更が、日付データ($expectedDate)に反映する",
     ({ value, format, expectedDate }: TestValueExpected) => {
