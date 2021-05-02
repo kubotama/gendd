@@ -8,25 +8,25 @@ import {
   DialogTitle,
   DialogActions,
 } from "@material-ui/core";
+import { format } from "date-fns";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import "./GenddApp.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    // root: {},
     text: {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "20px",
-      width: "200px",
+      width: "220px",
     },
     generateButton: {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: "20px",
-      width: "200px",
+      width: "220px",
     },
     privacyButton: {
       display: "block",
@@ -39,11 +39,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function GenddApp() {
   const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
+
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
   const textGenddValue: React.RefObject<HTMLInputElement> = React.createRef();
+  const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
+
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
-  const [open, setOpen] = React.useState(false);
+  const [dateFormatString, setDateFormat] = useState("yyyy/MM/dd HH:mm:ss");
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
 
   /**
@@ -54,7 +59,7 @@ export default function GenddApp() {
    */
   function onClickGendd() {
     const dateValueString = generateDummyDate(dateMin, dateMax);
-    const dateString = toDateTimeString(dateValueString);
+    const dateString = toDateTimeString(dateValueString, dateFormatString);
     setDateString(dateString);
     setDateValueString(dateValueString.toString());
     textGendd.current?.focus();
@@ -71,30 +76,13 @@ export default function GenddApp() {
   }
 
   /**
-   * 与えられた数値を文字列に変換して返します。指定された長さよりも短い場合には0で埋めます。
-   * @param {number} value - 文字列に変換する数値
-   * @param {number} length - 変換結果の文字列の長さ
-   * @return {string} - 変換結果の文字列
-   */
-  function toZeroPaddingString(value: number, length: number): string {
-    const str = "0000" + value.toString();
-    return str.slice(length * -1);
-  }
-
-  /**
    * 与えられた時刻値を文字列に変換します。
    * @param {number} value - 文字列に変換する時刻値
    * @return {string} - 時刻値から変換された文字列
    */
-  function toDateTimeString(value: number): string {
+  function toDateTimeString(value: number, dateFormat: string): string {
     const date = new Date(value);
-    const YYYY = date.getFullYear();
-    const MM = toZeroPaddingString(date.getMonth() + 1, 2);
-    const DD = toZeroPaddingString(date.getDate(), 2);
-    const hh = toZeroPaddingString(date.getHours(), 2);
-    const mm = toZeroPaddingString(date.getMinutes(), 2);
-    const ss = toZeroPaddingString(date.getSeconds(), 2);
-    const dateString = `${YYYY}/${MM}/${DD} ${hh}:${mm}:${ss}`;
+    const dateString = format(date, dateFormat);
     return dateString;
   }
 
@@ -128,6 +116,10 @@ export default function GenddApp() {
     </div>
   );
 
+  const changeFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDateFormat(event.target.value);
+  };
+
   return (
     <div>
       <TextField
@@ -145,6 +137,15 @@ export default function GenddApp() {
         value={dateValueString}
         inputRef={textGenddValue}
         variant="outlined"
+      />
+      <TextField
+        id="gendd-format-text"
+        className={classes.text}
+        label="日付データのフォーマット"
+        defaultValue={dateFormatString}
+        inputRef={textGenddFormat}
+        variant="outlined"
+        onChange={changeFormat}
       />
       <Button
         className={classes.generateButton}
