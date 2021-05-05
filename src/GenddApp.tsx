@@ -86,10 +86,6 @@ export default function GenddApp() {
     return dateString;
   }
 
-  function openPrivacy() {
-    setOpen(true);
-  }
-
   function handleClose() {
     setOpen(false);
   }
@@ -116,10 +112,6 @@ export default function GenddApp() {
     </div>
   );
 
-  const changeFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDateFormat(event.target.value);
-  };
-
   return (
     <div>
       <TextField
@@ -145,7 +137,9 @@ export default function GenddApp() {
         defaultValue={dateFormatString}
         inputRef={textGenddFormat}
         variant="outlined"
-        onChange={changeFormat}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setDateFormat(event.target.value)
+        }
       />
       <Button
         className={classes.generateButton}
@@ -158,7 +152,7 @@ export default function GenddApp() {
       <hr />
       <Button
         className={classes.privacyButton}
-        onClick={openPrivacy}
+        onClick={() => setOpen(true)}
         variant="contained"
       >
         プライバシー・ポリシーの表示
