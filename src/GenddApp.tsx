@@ -41,8 +41,6 @@ export default function GenddApp() {
   const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
 
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
-  const textGenddValue: React.RefObject<HTMLInputElement> = React.createRef();
-  const textGenddFormat: React.RefObject<HTMLInputElement> = React.createRef();
 
   const [dateValueString, setDateValueString] = useState("");
   const [dateString, setDateString] = useState("");
@@ -86,11 +84,7 @@ export default function GenddApp() {
     return dateString;
   }
 
-  function openPrivacy() {
-    setOpen(true);
-  }
-
-  function handleClose() {
+  function privacyClose() {
     setOpen(false);
   }
 
@@ -116,10 +110,6 @@ export default function GenddApp() {
     </div>
   );
 
-  const changeFormat = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDateFormat(event.target.value);
-  };
-
   return (
     <div>
       <TextField
@@ -135,7 +125,6 @@ export default function GenddApp() {
         className={classes.text}
         label="日付データの内部表現"
         value={dateValueString}
-        inputRef={textGenddValue}
         variant="outlined"
       />
       <TextField
@@ -143,9 +132,10 @@ export default function GenddApp() {
         className={classes.text}
         label="日付データのフォーマット"
         defaultValue={dateFormatString}
-        inputRef={textGenddFormat}
         variant="outlined"
-        onChange={changeFormat}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          setDateFormat(event.target.value)
+        }
       />
       <Button
         className={classes.generateButton}
@@ -158,18 +148,18 @@ export default function GenddApp() {
       <hr />
       <Button
         className={classes.privacyButton}
-        onClick={openPrivacy}
+        onClick={() => setOpen(true)}
         variant="contained"
       >
         プライバシー・ポリシーの表示
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={privacyClose}>
         <DialogTitle>{"プライバシー・ポリシー"}</DialogTitle>
         <DialogContent>
           <DialogContentText>{privacyBody}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant="contained">
+          <Button onClick={privacyClose} variant="contained">
             閉じる
           </Button>
         </DialogActions>
