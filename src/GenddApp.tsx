@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function GenddApp() {
-  const dateMax = 1640962800000; // 生成する日付データの最大値 2022/01/01 00:00:00
-  const dateMin = 1609426800000; // 生成する日付データの最小値 2021/01/01 00:00:00
+  const dateMax = 1640962800000; // 生成する日時データの最大値 2022/01/01 00:00:00
+  const dateMin = 1609426800000; // 生成する日時データの最小値 2021/01/01 00:00:00
 
   const textGendd: React.RefObject<HTMLInputElement> = React.createRef();
 
@@ -64,10 +64,10 @@ export default function GenddApp() {
   }
 
   /**
-   * 指定した範囲内でランダムに生成した日付データを返します。
-   * @param {number} dateMin - 生成する日付の最小値(この値は生成する範囲に含まれる)、Dateの時刻値形式
-   * @param {number} dateMax - 生成する日付の最大値(この値は生成する範囲に含まれない)、Dateの時刻値形式
-   * @return (number) - 生成された日付データ、Dateの時刻値形式
+   * 指定した範囲内でランダムに生成した日時データを返します。
+   * @param {number} dateMin - 生成する日時の最小値(この値は生成する範囲に含まれる)、Dateの時刻値形式
+   * @param {number} dateMax - 生成する日時の最大値(この値は生成する範囲に含まれない)、Dateの時刻値形式
+   * @return (number) - 生成された日時データ、Dateの時刻値形式
    */
   function generateDummyDate(dateMin: number, dateMax: number) {
     return Math.floor(Math.random() * (dateMax - dateMin) + dateMin);
@@ -115,7 +115,7 @@ export default function GenddApp() {
       <TextField
         id="gendd-text"
         className={classes.text}
-        label="日付データ"
+        label="日時データ"
         value={dateString}
         inputRef={textGendd}
         variant="outlined"
@@ -123,14 +123,14 @@ export default function GenddApp() {
       <TextField
         id="gendd-value-text"
         className={classes.text}
-        label="日付データの内部表現"
+        label="日時データの内部表現"
         value={dateValueString}
         variant="outlined"
       />
       <TextField
         id="gendd-format-text"
         className={classes.text}
-        label="日付データのフォーマット"
+        label="日時データのフォーマット"
         defaultValue={dateFormatString}
         variant="outlined"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

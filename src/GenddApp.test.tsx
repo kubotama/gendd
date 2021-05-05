@@ -17,36 +17,36 @@ describe("要素の存在", () => {
     expect(genddApp.getByText("生成")).toBeInTheDocument();
   });
 
-  test("「日付データ」ラベルが存在", () => {
+  test("「日時データ」ラベルが存在", () => {
     // Arrange
 
     // Act
     const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日時データ")).toBeInTheDocument();
   });
 
-  test("「日付データ」テキストボックスが存在", () => {
+  test("「日時データ」テキストボックスが存在", () => {
     // Arrange
 
     // Act
     const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(genddApp.getByLabelText("日付データ")).toBeInTheDocument();
+    expect(genddApp.getByLabelText("日時データ")).toBeInTheDocument();
   });
 });
 
 describe("要素の初期値", () => {
-  test("「日付データ」テキストボックスの初期値は空白", () => {
+  test("「日時データ」テキストボックスの初期値は空白", () => {
     // Arrange
 
     // Act
     const genddApp = render(<GenddApp />);
 
     // Assert
-    expect(genddApp.getByLabelText("日付データ")).toHaveValue("");
+    expect(genddApp.getByLabelText("日時データ")).toHaveValue("");
   });
 });
 
@@ -85,10 +85,10 @@ describe("ボタンをクリック", () => {
 
       // Assert
       expect(
-        (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
+        (genddApp.getByLabelText("日時データ") as HTMLInputElement).value
       ).toBe(expectedDate);
       expect(
-        (genddApp.getByLabelText("日付データの内部表現") as HTMLInputElement)
+        (genddApp.getByLabelText("日時データの内部表現") as HTMLInputElement)
           .value
       ).toBe(expectedDateValue);
       expect(spyGendd).toHaveBeenCalledTimes(1);
@@ -103,7 +103,7 @@ describe("ボタンをクリック", () => {
     userEvent.click(genddApp.getByText("生成"));
 
     // Assert
-    expect(screen.getByLabelText("日付データ")).toHaveFocus();
+    expect(screen.getByLabelText("日時データ")).toHaveFocus();
   });
 });
 
@@ -115,25 +115,25 @@ describe("内部表現のテキストボックス", () => {
     // Act
 
     // Assert
-    expect(genddApp.getByLabelText("日付データの内部表現")).toHaveValue("");
+    expect(genddApp.getByLabelText("日時データの内部表現")).toHaveValue("");
   });
 });
 
-describe("日付データの書式のテキストボックス", () => {
-  test("「日付データのフォーマット」のテキストボックスの初期値", () => {
+describe("日時データの書式のテキストボックス", () => {
+  test("「日時データのフォーマット」のテキストボックスの初期値", () => {
     // Arrange
     const genddApp = render(<GenddApp />);
 
     // Act
 
     // Assert
-    expect(genddApp.getByLabelText("日付データのフォーマット")).toHaveValue(
+    expect(genddApp.getByLabelText("日時データのフォーマット")).toHaveValue(
       "yyyy/MM/dd HH:mm:ss"
     );
   });
 });
 
-describe("日付データのフォーマットの変更が、日付データに反映する", () => {
+describe("日時データのフォーマットの変更が、日時データに反映する", () => {
   interface TestValueExpected {
     value: number;
     format: string;
@@ -155,16 +155,16 @@ describe("日付データのフォーマットの変更が、日付データに�
     ${0.3801109594519132} | ${"HH:mm:ss"}     | ${"17:46:19"}
     ${0.2895743899655405} | ${"MMMM do EEEE"} | ${"April 16th Friday"}
   `(
-    "日付データのフォーマットの変更が、日付データ($expectedDate)に反映する",
+    "日時データのフォーマットの変更が、日時データ($expectedDate)に反映する",
     ({ value, format, expectedDate }: TestValueExpected) => {
       // Arrange
       const genddApp = render(<GenddApp />);
       spyGendd.mockReturnValue(value);
 
       // Act
-      // 日付フォーマットをYYYY/MM/ddに変更する
+      // 日時フォーマットをYYYY/MM/ddに変更する
       const formatText = genddApp.getByLabelText(
-        "日付データのフォーマット"
+        "日時データのフォーマット"
       ) as HTMLInputElement;
       fireEvent.change(formatText, { target: { value: format } });
 
@@ -173,7 +173,7 @@ describe("日付データのフォーマットの変更が、日付データに�
       // Assert
       //
       expect(
-        (genddApp.getByLabelText("日付データ") as HTMLInputElement).value
+        (genddApp.getByLabelText("日時データ") as HTMLInputElement).value
       ).toBe(expectedDate);
     }
   );
