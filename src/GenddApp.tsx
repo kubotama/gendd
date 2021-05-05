@@ -86,7 +86,7 @@ export default function GenddApp() {
     return dateString;
   }
 
-  function handleClose() {
+  function privacyClose() {
     setOpen(false);
   }
 
@@ -157,13 +157,13 @@ export default function GenddApp() {
       >
         プライバシー・ポリシーの表示
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={privacyClose}>
         <DialogTitle>{"プライバシー・ポリシー"}</DialogTitle>
         <DialogContent>
           <DialogContentText>{privacyBody}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant="contained">
+          <Button onClick={privacyClose} variant="contained">
             閉じる
           </Button>
         </DialogActions>
